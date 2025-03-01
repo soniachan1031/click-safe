@@ -19,7 +19,10 @@ body {
     background-color: #181818;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    min-height: 250px; /* Ensures space for the tab bar */
+    padding-bottom: 60px; /* Prevents content from overlapping the tab bar */
 }
+
 
 /* Title */
 h2 {
@@ -56,7 +59,7 @@ input::placeholder {
 }
 
 input:focus {
-    border-color: #ff5e5e;
+    border-color: #0048ec;
 }
 
 /* Scan Button */
@@ -64,7 +67,7 @@ button {
     width: 80%; /* Adjust the width of the button */
     max-width: 250px; /* Prevents it from being too large */
     padding: 12px;
-    background: linear-gradient(135deg, #ff5e5e, #e84118);
+    background: linear-gradient(135deg, #0048ec, #e84118);
     color: white;
     font-weight: bold;
     font-size: 16px;
@@ -77,7 +80,8 @@ button {
 
 
 button:hover {
-    background: linear-gradient(135deg, #e84118, #ff5e5e);
+    background: linear-gradient(135deg, #0048ec, #e84118);
+;
     transform: scale(1.02);
 }
 
@@ -85,7 +89,7 @@ button:hover {
 #loading {
     display: none;
     font-size: 14px;
-    color: #ff5e5e;
+    color: #0048ec;
     margin-top: 10px;
     animation: pulse 1.5s infinite;
 }
@@ -113,3 +117,60 @@ button:hover {
 .hidden {
     display: none;
 }
+
+/* Bottom Navigation Bar */
+.tab-bar {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #181818;
+    padding: 12px 0;
+    border-top: 1px solid #333;
+    z-index: 10;
+}
+
+/* Tab Buttons */
+.tab-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 10px 0;
+    transition: 0.3s ease-in-out;
+    text-align: center;
+}
+
+.tab-btn.active {
+    color: white;
+    background: linear-gradient(135deg, #0048ec, #e84118);
+;
+    font-weight: bold;
+}
+
+.tab-btn:hover {
+    color: white;
+}
+
+/* Hide inactive tabs */
+.tab-content {
+    display: none;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+}
+
+/* Show active tab */
+.tab-content.active {
+    display: block;
+}
+

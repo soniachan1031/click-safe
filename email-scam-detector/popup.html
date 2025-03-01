@@ -8,16 +8,44 @@
 </head>
 <body>
     <div class="popup-container">
-        <h2>Scam Scanner</h2>
-        <input type="text" id="scanInput" placeholder="Enter email, link, or IP">
-        <button id="scanButton">Scan</button>
-        
-        <div id="loading" class="hidden">Scanning...</div>
-
-        <div id="resultContainer">
-            <!-- Results will be dynamically inserted here -->
+    
+        <!-- Home Page (Default Active) -->
+        <div id="homePage" class="tab-content active">
+            <h2>Scam Scanner</h2>
+            <input type="text" id="scanInput" placeholder="Enter email, link, or IP">
+            <button id="scanButton">Scan</button>
+            <div id="loading" class="hidden">Scanning...</div>
+            <div id="resultContainer"></div>
+        </div>
+    
+        <!-- Report Scam Page -->
+        <div id="reportScamPage" class="tab-content">
+            <h2>Report a Scam</h2>
+            <p>Coming soon...</p>
+        </div>
+    
+        <!-- Redeem Page -->
+        <div id="redeemPage" class="tab-content">
+            <h2>Redeem</h2>
+            <p>Coming soon...</p>
+        </div>
+    
+        <!-- Reports Page -->
+        <div id="reportsPage" class="tab-content">
+            <h2>Reports</h2>
+            <p>Coming soon...</p>
         </div>
     </div>
+    
+
+    <!-- Navigation Bar -->
+    <div class="tab-bar">
+        <button class="tab-btn active" data-tab="homePage">🏠 Home</button>
+        <button class="tab-btn" data-tab="reportScamPage">🚨 Report</button>
+        <button class="tab-btn" data-tab="redeemPage">🎁 Redeem</button>
+        <button class="tab-btn" data-tab="reportsPage">📊 Analytics</button>
+    </div>
+    
 
     <script src="popup.js"></script>
 </body>
