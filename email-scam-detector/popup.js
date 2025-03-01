@@ -132,57 +132,84 @@ document.getElementById("reportButton").addEventListener("click", function () {
     let reportInput = document.getElementById("reportInput").value.trim();
     let scamType = document.getElementById("scamType").value;
     let otherScamType = document.getElementById("otherScamType").value.trim();
-    let reportMessage = document.getElementById("reportMessage");
     let reportForm = document.getElementById("reportForm");
-    let loadingScreen = document.getElementById("loadingScreen");
-    let loadingText = document.getElementById("loadingText");
+    let successMessage = document.getElementById("successMessage");
 
     if (!reportInput || !scamType || (scamType === "other" && !otherScamType)) {
-        reportMessage.style.backgroundColor = "#e84118";
-        reportMessage.style.color = "#fff";
-        reportMessage.innerHTML = "⚠️ Please fill in all required fields!";
-        reportMessage.classList.remove("hidden");
+        alert("⚠️ Please fill in all required fields!"); // Simple validation
         return;
     }
 
-    // Hide form and show loading screen
+    // Hide form and show success message
     reportForm.classList.add("hidden");
-    loadingScreen.classList.remove("hidden");
+    successMessage.classList.remove("hidden");
 
-    let messages = [
-        "🔍 Checking...",
-        "🔄 Processing...",
-        "🛡️ Validating...",
-        "✅ Report Validated! You have earned 100 points! 🎉"
-    ];
+    // Reset fields after 2 seconds
+    setTimeout(() => {
+        document.getElementById("reportInput").value = "";
+        document.getElementById("scamType").value = "";
+        document.getElementById("otherScamType").value = "";
+        document.getElementById("otherScamType").classList.add("hidden");
 
-    let index = 0;
-    let interval = setInterval(() => {
-        if (index < messages.length) {
-            loadingText.innerHTML = messages[index];
-            index++;
-        } else {
-            clearInterval(interval);
-
-            // Hide loading and show success message
-            loadingScreen.classList.add("hidden");
-            reportMessage.classList.remove("hidden");
-            reportMessage.style.backgroundColor = "#0048ec";
-            reportMessage.style.color = "#fff";
-            reportMessage.innerHTML = "✅ Report Successfully Submitted! You earned 100 points! 🎉";
-
-            // Reset fields after 2s
-            setTimeout(() => {
-                document.getElementById("reportInput").value = "";
-                document.getElementById("scamType").value = "";
-                document.getElementById("otherScamType").value = "";
-                document.getElementById("otherScamType").classList.add("hidden");
-                reportMessage.classList.add("hidden");
-                reportForm.classList.remove("hidden");
-            }, 2000);
-        }
-    }, 1000);
+        successMessage.classList.add("hidden");
+        reportForm.classList.remove("hidden");
+    }, 10000);
 });
 
-
 //#endregion Report screen ends
+
+//#region  Redeem screen starts 
+// Initialize user points (Can be stored in localStorage later)
+let userPoints = 70000;
+
+// Function to update the displayed points balance
+function updatePointsDisplay() {
+    document.getElementById("pointsBalance").innerHTML = `You have <b>${userPoints} points</b>`;
+}
+
+// Update display on load
+document.addEventListener("DOMContentLoaded", updatePointsDisplay);
+
+document.getElementById("redeemButton").addEventListener("click", function () {
+    let redeemEmail = document.getElementById("redeemEmail").value.trim();
+    let redeemAmount = parseInt(document.getElementById("redeemAmount").value.trim());
+    let redeemForm = document.getElementById("redeemForm");
+    let redeemSuccessMessage = document.getElementById("redeemSuccessMessage");
+
+    // Validation: Ensure valid input
+    if (!redeemEmail || isNaN(redeemAmount) || redeemAmount <= 0) {
+        alert("⚠️ Please enter a valid email and amount!");
+        return;
+    }
+
+    // Validation: Ensure minimum 10,000 points for withdrawal
+    if (redeemAmount < 10000) {
+        alert("⚠️ Minimum withdrawal is 10,000 points!");
+        return;
+    }
+
+    // Validation: Ensure user has enough points
+    if (redeemAmount > userPoints) {
+        alert("⚠️ Insufficient points to redeem!");
+        return;
+    }
+
+    // Deduct points from user balance
+    userPoints -= redeemAmount;
+    updatePointsDisplay();
+
+    // Hide form and show success message
+    redeemForm.classList.add("hidden");
+    redeemSuccessMessage.classList.remove("hidden");
+
+    // Reset fields and hide success message after 2 seconds
+    setTimeout(() => {
+        document.getElementById("redeemEmail").value = "";
+        document.getElementById("redeemAmount").value = "";
+
+        redeemSuccessMessage.classList.add("hidden");
+        redeemForm.classList.remove("hidden");
+    }, 10000);
+});
+
+//#endregion Redeem screen ends

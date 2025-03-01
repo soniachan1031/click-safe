@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Click Safe</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="popup-container">
-    
+
         <!-- Home Page (Default Active) -->
         <div id="homePage" class="tab-content active">
             <h2>Scam Scanner</h2>
@@ -17,54 +19,77 @@
             <div id="loading" class="hidden">Scanning...</div>
             <div id="resultContainer"></div>
         </div>
-    
+
         <!-- Report Scam Page -->
-       <!-- Report Scam Page -->
-<div id="reportScamPage" class="tab-content">
-    <h2>Report a Scam</h2>
-    
-    <div id="reportForm">
-        <input type="text" id="reportInput" placeholder="Enter the scam URL">
+
+        <div id="reportScamPage" class="tab-content">
+            <h2>Report a Scam</h2>
+
+            <div id="reportForm">
+                <input type="text" id="reportInput" placeholder="Enter the scam URL">
+
+                <select id="scamType">
+                    <option value="" disabled selected>Select Scam Type</option>
+                    <option value="phishing">Phishing</option>
+                    <option value="fakeShop">Fake Online Shop</option>
+                    <option value="investmentScam">Investment Scam</option>
+                    <option value="identityTheft">Identity Theft</option>
+                    <option value="malware">Malware/Spyware</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <!-- Hidden input for "Other" scam type -->
+                <input type="text" id="otherScamType" class="hidden" placeholder="Enter scam type">
+
+                <button id="reportButton">Report</button>
+                <p class="points-text">📢 You will earn <b>100 points</b> for reporting!</p>
+            </div>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="hidden">
+                <div class="success-icon">✅</div>
+                <h2>Success</h2>
+                <p>Report Successfully Submitted! <br> You earned <b>100 points!</b> 🎉</p>
+            </div>
+
+        </div>
+
+       <!-- Redeem Page -->
+<div id="redeemPage" class="tab-content">
+    <h2>Redeem Points</h2>
+
+    <p id="pointsBalance" class="points-balance">You have <b>700 points</b></p>
+
+    <div id="redeemForm">
+        <input type="email" id="redeemEmail" placeholder="Enter your email">
         
-        <select id="scamType">
-            <option value="" disabled selected>Select Scam Type</option>
-            <option value="phishing">Phishing</option>
-            <option value="fakeShop">Fake Online Shop</option>
-            <option value="investmentScam">Investment Scam</option>
-            <option value="identityTheft">Identity Theft</option>
-            <option value="malware">Malware/Spyware</option>
-            <option value="other">Other</option>
-        </select>
+        <input type="number" id="redeemAmount" placeholder="Enter amount to redeem">
+        
+        <p class="conversion-rate">💰 10,000 points = $10 gift card</p>
 
-        <!-- Hidden input for "Other" scam type -->
-        <input type="text" id="otherScamType" class="hidden" placeholder="Enter scam type">
-
-        <button id="reportButton">Report</button>
-        <p class="points-text">📢 You will earn <b>100 points</b> for reporting!</p>
+        <button id="redeemButton">Redeem</button>
     </div>
 
-    <!-- Loading Screen -->
-    <div id="loadingScreen" class="hidden">
-        <p id="loadingText">🔍 Checking...</p>
+    <!-- Success Message -->
+    <div id="redeemSuccessMessage" class="hidden">
+        <div class="success-icon">✅</div>
+        <h2>Success</h2>
+        <p>Redeem Successful! <br>The gift card will be sent to your email within 2 business days. 🎉</p>
     </div>
 
-    <div id="reportMessage" class="hidden"></div>
+    <!-- Error Message -->
+    <div id="redeemErrorMessage" class="hidden"></div>
 </div>
 
-    
-        <!-- Redeem Page -->
-        <div id="redeemPage" class="tab-content">
-            <h2>Redeem</h2>
-            <p>Coming soon...</p>
-        </div>
-    
+
+
         <!-- Reports Page -->
         <div id="reportsPage" class="tab-content">
             <h2>Reports</h2>
             <p>Coming soon...</p>
         </div>
     </div>
-    
+
 
     <!-- Navigation Bar -->
     <div class="tab-bar">
@@ -73,8 +98,9 @@
         <button class="tab-btn" data-tab="redeemPage">🎁 Redeem</button>
         <button class="tab-btn" data-tab="reportsPage">📊 Analytics</button>
     </div>
-    
+
 
     <script src="popup.js"></script>
 </body>
+
 </html>

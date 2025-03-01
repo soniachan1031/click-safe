@@ -246,7 +246,7 @@ button:hover {
     color: #ffffff;
 }
 
-/* Hide and show elements */
+/* Hide elements initially */
 .hidden {
     display: none;
 }
@@ -258,15 +258,162 @@ button:hover {
     margin-top: 5px;
 }
 
-/* Loading screen */
-#loadingScreen {
-    background: #0048ec;
-    color: white;
-    padding: 15px;
-    border-radius: 8px;
+/* Success Message Container */
+#successMessage {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
+    width: 80%;
+    max-width: 300px;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Success Check Icon */
+.success-icon {
+    font-size: 40px;
+    color: #2ecc71;
+    margin-bottom: 10px;
+}
+
+/* Success Title */
+#successMessage h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+/* Success Message Text */
+#successMessage p {
+    font-size: 14px;
+    color: #fff;
+    font-weight: normal;
+    line-height: 1.4;
+}
+
+/* Points Balance */
+.points-balance {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+/* Input Fields */
+#redeemEmail, #redeemAmount {
     width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background-color: #252525;
+    color: #ffffff;
+    outline: none;
+    font-size: 14px;
+    text-align: center;
+    transition: border 0.2s ease-in-out;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#redeemEmail::placeholder, #redeemAmount::placeholder {
+    color: #888;
+}
+
+#redeemEmail:focus, #redeemAmount:focus {
+    border-color: #0048ec;
+}
+
+/* Conversion Rate Text */
+.conversion-rate {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+/* Redeem Button */
+#redeemButton {
+    width: 80%;
+    max-width: 250px;
+    padding: 12px;
+    background: linear-gradient(135deg, #0048ec, #e84118);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 72, 236, 0.2);
+}
+
+#redeemButton:hover {
+    background: linear-gradient(135deg, #e84118, #0048ec);
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 72, 236, 0.4);
+}
+
+/* Success Message Styling */
+#redeemSuccessMessage {
+    background: #181818;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Success Check Icon */
+.success-icon {
+    font-size: 40px;
+    color: #2ecc71;
+    margin-bottom: 10px;
+}
+
+/* Success Title */
+#redeemSuccessMessage h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+/* Success Message Text */
+#redeemSuccessMessage p {
+    font-size: 14px;
+    color: #ddd;
+    font-weight: normal;
+    line-height: 1.4;
+}
+
+/* Points Balance */
+.points-balance {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+/* Error Message */
+#redeemErrorMessage {
+    background: #e84118;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
 }
 
