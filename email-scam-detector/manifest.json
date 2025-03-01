@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Scam Scanner",
+  "version": "1.0",
+  "description": "Detects scam emails, links, and IPs in real-time.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://phishtank-api.com/*",
+    "https://www.stopforumspam.com/*",
+    "https://safebrowsing.googleapis.com/*",
+    "https://ipinfo.io/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/internet16x16.png",
+      "48": "icons/alert48x48.png",
+     "128": "icons/icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*", "https://outlook.live.com/*", "https://mail.yahoo.com/*", "<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icons/internet16x16.png",
+    "48": "icons/alert48x48.png",
+    "128": "icons/icon.png"
+  }
+}

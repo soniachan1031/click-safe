@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scam Scanner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="popup-container">
+        <h2>Scam Scanner</h2>
+        <input type="text" id="scanInput" placeholder="Enter email, link, or IP">
+        <button id="scanButton">Scan</button>
+        
+        <div id="loading" class="hidden">Scanning...</div>
+
+        <div id="resultContainer">
+            <!-- Results will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
