@@ -3,6 +3,7 @@ import OpenAI from "openai";
 import dotenv from "dotenv";
 import axios from "axios";
 import * as cheerio from "cheerio";
+import puppeteer from "puppeteer";
 
 // Load environment variables
 dotenv.config();
@@ -10,34 +11,60 @@ dotenv.config();
 const app = express();
 const openai = new OpenAI({ apiKey: process.env.OPENAI });
 
-// Increase payload limit to handle large scraped data
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
+// Function to check if a site needs Puppeteer
+async function needsPuppeteer(url) {
+    const jsHeavySites = ["instagram.com", "twitter.com", "linkedin.com", "facebook.com"];
+    return jsHeavySites.some((site) => url.includes(site));
+}
 
 // Function to scrape website
 async function scrapeWebsite(url) {
     try {
         console.log(`Scraping website: ${url}`);
 
-        // Attempt with axios (set timeout)
+        if (await needsPuppeteer(url)) {
+            console.log("Using Puppeteer for JavaScript-heavy website...");
+            return await scrapeWithPuppeteer(url);
+        }
+
+        // Default to Axios for normal sites
         const { data } = await axios.get(url, {
             headers: { "User-Agent": "Mozilla/5.0" },
-            timeout: 10000, // 10 seconds timeout
+            timeout: 10000,
         });
 
         const $ = cheerio.load(data);
         const visibleText = $("body").text().replace(/\s+/g, " ").trim();
-        return visibleText.substring(0, 2000); // Limit to 2000 chars
+        return visibleText.substring(0, 3000); // Increase limit for better AI accuracy
 
     } catch (error) {
         console.error("Error scraping website:", error.message);
 
-        // Handle different types of unreachable errors
         if (error.code === "ENOTFOUND" || error.code === "ECONNREFUSED" || error.code === "ETIMEDOUT" || error.message.includes("timeout")) {
-            throw new Error("Site Not Reachable"); // Mark as unreachable
+            throw new Error("Site Not Reachable");
         }
 
-        return "Scraping failed"; // Generic failure
+        return "Scraping failed";
+    }
+}
+
+// Function to scrape JavaScript-heavy websites with Puppeteer
+async function scrapeWithPuppeteer(url) {
+    try {
+        const browser = await puppeteer.launch({ headless: "new" });
+        const page = await browser.newPage();
+        await page.goto(url, { waitUntil: "domcontentloaded", timeout: 15000 });
+
+        const visibleText = await page.evaluate(() => document.body.innerText);
+        await browser.close();
+
+        return visibleText.substring(0, 3000);
+    } catch (error) {
+        console.error("Puppeteer failed:", error.message);
+        return "Scraping failed";
     }
 }
 
@@ -53,7 +80,6 @@ app.post("/analyze", async (req, res) => {
         try {
             scrapedData = await scrapeWebsite(url);
         } catch (error) {
-            // Handle site not reachable errors
             return res.status(400).json({
                 error: "Site Not Reachable",
                 legitimacyScore: 0,
@@ -66,30 +92,45 @@ app.post("/analyze", async (req, res) => {
         }
 
         // Send data to OpenAI for further analysis
-        const completion = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
-            messages: [
-                {
-                    role: "user",
-                    content: `Analyze the following website data and return a structured JSON response.
-                    Ensure the output is a **valid JSON object** with these keys:
-                    {
-                        "legitimacyScore": (integer between 1-100),
-                        "scamType": (string or "Not detected"),
-                        "riskFactors": (array of strings),
-                        "keyIndicators": (array of strings),
-                        "insights": (string)
-                    }
+const completion = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+        {
+            role: "user",
+            content: `Analyze the following website data and return a structured JSON response. 
 
-                    Website Data:
-                    HTTPS: ${isHttps ? "Yes" : "No"}
-                    Scraped Content: ${scrapedData}
+### **⚠️ IMPORTANT RULES:**
+1. **STRICT JSON FORMAT**: Output **must be a valid JSON object**.
+2. **LEGITIMACY SCORE (1-100):**
+   - 90-100: **Trusted & Recognized** (e.g., Google, Instagram, Microsoft)
+   - 70-89: **Likely Legitimate**, minor concerns (e.g., missing company info)
+   - 40-69: **Suspicious**, potential risks detected (e.g., misleading content, low transparency)
+   - 1-39: **High Risk**, strong scam indicators
+3. **SCAM TYPE:** If a scam is detected, **identify the type** (e.g., phishing, counterfeit, data harvesting). If no scam, return "Not detected."
+4. **RISK FACTORS:** Provide at least **one specific reason** for scores below 90.
+5. **KEY INDICATORS:** Highlight both **positive and negative signals** (e.g., "HTTPS secured," "Fake reviews detected").
+6. **INSIGHTS:** Ensure insights are factual, avoiding assumptions. **If scraping fails, state 'Insufficient data for full assessment'.**
 
-                    Respond only with JSON and nothing else.`
-                }
-            ],
-            response_format: { type: "json_object" }
-        });
+### **Website Data:**
+- **HTTPS Security:** ${isHttps ? "Yes" : "No"}
+- **Scraped Content:** ${scrapedData}
+
+### **🔍 Expected JSON Output:**
+\`\`\`json
+{
+    "legitimacyScore": (integer between 1-100),
+    "scamType": (string or "Not detected"),
+    "riskFactors": (array of strings, at least one if score <90),
+    "keyIndicators": (array of strings, mix of pros/cons),
+    "insights": (string, factual & objective)
+}
+\`\`\`
+
+Respond **ONLY** with JSON—no extra text.`
+        }
+    ],
+    response_format: { type: "json_object" }
+});
 
         console.log(`AI Raw Response:`, completion.choices[0].message.content);
         const parsedResponse = JSON.parse(completion.choices[0].message.content);
