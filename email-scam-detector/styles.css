@@ -174,3 +174,99 @@ button:hover {
     display: block;
 }
 
+/* Input Field & Dropdown */
+#reportInput, #scamType, #otherScamType {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background-color: #252525;
+    color: #ffffff;
+    outline: none;
+    font-size: 14px;
+    text-align: center;
+    transition: border 0.2s ease-in-out;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+#reportInput::placeholder, #otherScamType::placeholder {
+    color: #888;
+}
+
+#reportInput:focus, #scamType:focus, #otherScamType:focus {
+    border-color: #0048ec;
+}
+
+/* Report Button */
+#reportButton {
+    width: 80%;
+    max-width: 250px;
+    padding: 12px;
+    background: linear-gradient(135deg, #0048ec, #e84118);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 72, 236, 0.2);
+    position: relative;
+    text-align: center;
+}
+
+/* Points Display on Report Button */
+#pointsEarned {
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 8px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.points-visible {
+    opacity: 1;
+}
+
+.points-hidden {
+    opacity: 0;
+}
+
+/* Success Message */
+#reportMessage {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #252525;
+    width: 100%;
+    color: #ffffff;
+}
+
+/* Hide and show elements */
+.hidden {
+    display: none;
+}
+
+/* Small text for points below button */
+.points-text {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 5px;
+}
+
+/* Loading screen */
+#loadingScreen {
+    background: #0048ec;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+

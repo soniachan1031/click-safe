@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+//#region Navigation tabs starts
 document.addEventListener("DOMContentLoaded", () => {
     // Set default tab to Home on load
     switchTab('homePage', document.querySelector("[data-tab='homePage']"));
@@ -113,4 +114,75 @@ function switchTab(tabId, clickedButton) {
     }
 }
 
+//#endregion Navigation tabs ends
 
+//#region Report screen starts
+document.getElementById("scamType").addEventListener("change", function () {
+    let otherInput = document.getElementById("otherScamType");
+    
+    if (this.value === "other") {
+        otherInput.classList.remove("hidden");
+    } else {
+        otherInput.classList.add("hidden");
+        otherInput.value = ""; // Clear input if hidden
+    }
+});
+
+document.getElementById("reportButton").addEventListener("click", function () {
+    let reportInput = document.getElementById("reportInput").value.trim();
+    let scamType = document.getElementById("scamType").value;
+    let otherScamType = document.getElementById("otherScamType").value.trim();
+    let reportMessage = document.getElementById("reportMessage");
+    let reportForm = document.getElementById("reportForm");
+    let loadingScreen = document.getElementById("loadingScreen");
+    let loadingText = document.getElementById("loadingText");
+
+    if (!reportInput || !scamType || (scamType === "other" && !otherScamType)) {
+        reportMessage.style.backgroundColor = "#e84118";
+        reportMessage.style.color = "#fff";
+        reportMessage.innerHTML = "⚠️ Please fill in all required fields!";
+        reportMessage.classList.remove("hidden");
+        return;
+    }
+
+    // Hide form and show loading screen
+    reportForm.classList.add("hidden");
+    loadingScreen.classList.remove("hidden");
+
+    let messages = [
+        "🔍 Checking...",
+        "🔄 Processing...",
+        "🛡️ Validating...",
+        "✅ Report Validated! You have earned 100 points! 🎉"
+    ];
+
+    let index = 0;
+    let interval = setInterval(() => {
+        if (index < messages.length) {
+            loadingText.innerHTML = messages[index];
+            index++;
+        } else {
+            clearInterval(interval);
+
+            // Hide loading and show success message
+            loadingScreen.classList.add("hidden");
+            reportMessage.classList.remove("hidden");
+            reportMessage.style.backgroundColor = "#0048ec";
+            reportMessage.style.color = "#fff";
+            reportMessage.innerHTML = "✅ Report Successfully Submitted! You earned 100 points! 🎉";
+
+            // Reset fields after 2s
+            setTimeout(() => {
+                document.getElementById("reportInput").value = "";
+                document.getElementById("scamType").value = "";
+                document.getElementById("otherScamType").value = "";
+                document.getElementById("otherScamType").classList.add("hidden");
+                reportMessage.classList.add("hidden");
+                reportForm.classList.remove("hidden");
+            }, 2000);
+        }
+    }, 1000);
+});
+
+
+//#endregion Report screen ends

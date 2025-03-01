@@ -19,10 +19,38 @@
         </div>
     
         <!-- Report Scam Page -->
-        <div id="reportScamPage" class="tab-content">
-            <h2>Report a Scam</h2>
-            <p>Coming soon...</p>
-        </div>
+       <!-- Report Scam Page -->
+<div id="reportScamPage" class="tab-content">
+    <h2>Report a Scam</h2>
+    
+    <div id="reportForm">
+        <input type="text" id="reportInput" placeholder="Enter the scam URL">
+        
+        <select id="scamType">
+            <option value="" disabled selected>Select Scam Type</option>
+            <option value="phishing">Phishing</option>
+            <option value="fakeShop">Fake Online Shop</option>
+            <option value="investmentScam">Investment Scam</option>
+            <option value="identityTheft">Identity Theft</option>
+            <option value="malware">Malware/Spyware</option>
+            <option value="other">Other</option>
+        </select>
+
+        <!-- Hidden input for "Other" scam type -->
+        <input type="text" id="otherScamType" class="hidden" placeholder="Enter scam type">
+
+        <button id="reportButton">Report</button>
+        <p class="points-text">📢 You will earn <b>100 points</b> for reporting!</p>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="hidden">
+        <p id="loadingText">🔍 Checking...</p>
+    </div>
+
+    <div id="reportMessage" class="hidden"></div>
+</div>
+
     
         <!-- Redeem Page -->
         <div id="redeemPage" class="tab-content">
