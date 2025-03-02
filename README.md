@@ -56,12 +56,12 @@ Click Safe uses AI-powered analysis and community reporting to detect and preven
 
 ## 🔧 Installation & Setup🚀
 1️⃣ Clone the Repository
-    bash
+   ```sh
     ` git clone https://github.com/your-username/Click-Safe.git `
     ` cd Click-Safe `
     
 2️⃣ Install Dependencies
-    bash
+   ```sh
    ` npm install `
     
 3️⃣ Load the Extension in Chrome
@@ -92,13 +92,13 @@ We welcome contributors to improve Click Safe! 🚀
 ### Steps to Contribute
 1. Fork the repository 🍴
 2. Create a feature branch:
-    bash
+   ```sh
    ` git checkout -b feature-new-feature `
 3. Commit your changes
-    bash
+   ```sh
    ` git commit -m "Added new feature" `
 4. Push your branch:
-    bash
+   ```sh
    ` git push origin feature-new-feature `
 5. Submit a Pull Request (PR) 📢
 
