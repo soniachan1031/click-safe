@@ -1,15 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Checking if Leaflet Heatmap plugin is loaded...");
 
+    // Ensure Leaflet Heatmap plugin is loaded
     if (typeof L.heatLayer !== "function") {
-        console.error("Leaflet heatmap plugin not loaded! Ensure leaflet.heat is installed via NPM.");
+        console.error("Leaflet heatmap plugin not loaded! Check if leaflet-heat.js is included.");
         return;
     }
 
     console.log("Leaflet heatmap plugin loaded successfully!");
 
     // Initialize map centered in Kitchener, Canada
-    var map = L.map('map').setView([43.4516, -80.4925], 12); // Kitchener coordinates
+    var map = L.map('map').setView([43.4516, -80.4925], 13); // Kitchener coordinates
 
     // Add OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -31,5 +32,11 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     // Add heatmap layer
-    L.heatLayer(heatData, { radius: 25, blur: 20, maxZoom: 15 }).addTo(map);
+    L.heatLayer(heatData, {
+        radius: 25, blur: 20, maxZoom: 15, gradient: {
+            0.2: 'yellow',  // Low intensity
+            0.5: 'orange',  // Medium intensity
+            0.8: 'red'      // High intensity
+        }
+    }).addTo(map);
 });
