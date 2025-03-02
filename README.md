@@ -18,7 +18,7 @@ Click Safe uses AI-powered analysis and community reporting to detect and preven
 
 ## Technologies Used 🛠
 <div class="container">
-    <h2>Tech Stack</h2>
+    <h3>Tech Stack</h3>
     <table>
         <tr>
             <th>Component</th>
@@ -115,7 +115,7 @@ This project is licensed under the Apache License 2.0. See the LICENSE file for 
   <p> GitHub: https://github.com/Mr-BiG1 </p>
   <p> LinkedIn: https://www.linkedin.com/in/darsan-sabu-george-62732b271/ </p>
 
--  Mubarak Hussain Ridoy
+- Mubarak Hussain Ridoy
   <p> Email: ridoy51306@gmail.com </p>
   <p> GitHub: https://github.com/DeveloperRidoy </p>
   <p> LinkedIn: https://www.linkedin.com/in/md-ridoy/ </p>
