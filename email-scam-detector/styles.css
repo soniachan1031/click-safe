@@ -417,3 +417,63 @@ button:hover {
     box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
 }
 
+/* Analytics Page Container */
+.analytics-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* Analytics Cards */
+.analytics-card {
+    background: #252525;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 72, 236, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.analytics-card:hover {
+    transform: scale(1.05);
+}
+
+/* Card Title */
+.analytics-card h3 {
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+/* Card Numbers */
+.analytics-card p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+/* View Heatmap Button */
+#viewHeatmapButton {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #0048ec, #e84118);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 72, 236, 0.2);
+    margin-top: 15px;
+}
+
+#viewHeatmapButton:hover {
+    background: linear-gradient(135deg, #e84118, #0048ec);
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 72, 236, 0.4);
+}
+
+
