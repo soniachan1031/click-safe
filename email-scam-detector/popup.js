@@ -213,3 +213,30 @@ document.getElementById("redeemButton").addEventListener("click", function () {
 });
 
 //#endregion Redeem screen ends
+
+//#region  Analytics screen starts
+// Initialize analytics data
+let totalScams = 1230;
+let scamsPrevented = 950;
+let aiDetectedScams = 870;
+let userReportedScams = 360;
+
+// Function to update the analytics display
+function updateAnalyticsDisplay() {
+    document.getElementById("totalScams").innerText = totalScams;
+    document.getElementById("scamsPrevented").innerText = scamsPrevented;
+    document.getElementById("aiDetectedScams").innerText = aiDetectedScams;
+    document.getElementById("userReportedScams").innerText = userReportedScams;
+    document.getElementById("viewHeatmapButton").addEventListener("click", function () {
+        window.open("heatmap.html", "_blank");
+    });
+    
+}
+
+// Update display on load
+document.addEventListener("DOMContentLoaded", updateAnalyticsDisplay);
+
+
+
+//#endregion Analytics screen ends
+
