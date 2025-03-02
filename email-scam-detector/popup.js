@@ -4,15 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const resultContainer = document.getElementById("resultContainer");
     const loadingDiv = document.getElementById("loading");
 
-    // Retrieve stored analysis data when popup opens
-    chrome.storage.local.get(["analysisData", "siteUrl"], (result) => {
-        if (result.analysisData) {
-            scanInput.value = result.siteUrl || ""; // Fill the URL input field
-            displayResults(result.analysisData);
-            chrome.storage.local.remove(["analysisData", "siteUrl"]); // Clear stored data after displaying
-        }
-    });
-
     scanButton.addEventListener("click", async function () {
         const userInput = scanInput.value.trim();
         if (!userInput) {
