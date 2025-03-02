@@ -130,6 +130,8 @@ This project is licensed under the Apache License 2.0. See the LICENSE file for 
 <p>🔹 GitHub: https://github.com/soniachan1031 </p>
 <p>🔹 LinkedIn: https://www.linkedin.com/in/shongchan/ </p>
 
+![Group Photo](https://github.com/user-attachments/assets/9d573621-4056-4ea3-ad70-9d4226692ed1)
+
 ## ⭐ Support Us!
 If you find Click Safe useful, please star this repo ⭐ and share it with others!
 Together, we can make the internet safer for everyone! 🚀💙
