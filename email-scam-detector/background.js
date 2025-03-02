@@ -8,7 +8,7 @@ chrome.runtime.onSuspend.addListener(() => {
         console.log("Cleared analysis data and last user input on extension close, but kept lastScannedDomain.");
     });
 });
-
+ 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === "complete" && tab.url) {
         chrome.storage.local.get(["extensionActivated", "lastScannedDomain"], (result) => {
