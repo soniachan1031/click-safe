@@ -148,55 +148,89 @@ function switchTab(tabId, clickedButton) {
 
 //#endregion Navigation tabs ends
 
+
 //#region Report screen starts
-document.getElementById("scamType").addEventListener("change", function () {
-    let otherInput = document.getElementById("otherScamType");
-    
-    if (this.value === "other") {
-        otherInput.classList.remove("hidden");
-    } else {
-        otherInput.classList.add("hidden");
-        otherInput.value = ""; // Clear input if hidden
+function normalizeURL(url) {
+    try {
+        let parsedUrl = new URL(url.includes("://") ? url : `https://${url}`);
+        return parsedUrl.origin; // Returns standardized format (e.g., https://google.com)
+    } catch (e) {
+        return null; // Invalid URL
     }
-});
+}
 
-document.getElementById("reportButton").addEventListener("click", function () {
+document.getElementById("reportButton").addEventListener("click", async function () {
     let reportInput = document.getElementById("reportInput").value.trim();
-    let scamType = document.getElementById("scamType").value;
-    let otherScamType = document.getElementById("otherScamType").value.trim();
-    let reportForm = document.getElementById("reportForm");
-    let successMessage = document.getElementById("successMessage");
+    let normalizedURL = normalizeURL(reportInput);
 
-    if (!reportInput || !scamType || (scamType === "other" && !otherScamType)) {
-        alert("⚠️ Please fill in all required fields!"); // Simple validation
+    if (!normalizedURL) {
+        alert("⚠️ Enter a valid URL!");
         return;
     }
 
-    // Hide form and show success message
-    reportForm.classList.add("hidden");
-    successMessage.classList.remove("hidden");
+    try {
+        // Fetch already reported URLs
+        chrome.storage.sync.get(["reportedScams"], async (res) => {
+            let reportedScams = res.reportedScams || [];
 
-    // Reset fields after 2 seconds
-    setTimeout(() => {
-        document.getElementById("reportInput").value = "";
-        document.getElementById("scamType").value = "";
-        document.getElementById("otherScamType").value = "";
-        document.getElementById("otherScamType").classList.add("hidden");
+            // Check if the URL has already been reported
+            if (reportedScams.includes(normalizedURL)) {
+                alert("⚠️ This URL has already been reported. You cannot earn points multiple times.");
+                return;
+            }
 
-        successMessage.classList.add("hidden");
-        reportForm.classList.remove("hidden");
-    }, 10000);
+            // Call the /analyze API to get legitimacyScore
+            let response = await fetch("http://localhost:5000/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ url: normalizedURL }), // Use normalized URL
+            });
+
+            let data = await response.json();
+
+            if (data.legitimacyScore >= 70) {
+                // Website is NOT a scam
+                alert(`ℹ️ The website has a legitimacy score of ${data.legitimacyScore}/100 and is NOT classified as a scam.`);
+            } else {
+                // Website is a scam, award 100 points
+                chrome.storage.sync.get(["userPoints"], (res) => {
+                    let newPoints = (res.userPoints || 10000) + 100;
+                    chrome.storage.sync.set({ userPoints: newPoints });
+
+                    // Add the reported URL to storage
+                    reportedScams.push(normalizedURL);
+                    chrome.storage.sync.set({ reportedScams });
+
+                    alert(`✅ Scam reported! 100 points awarded. Website legitimacy score: ${data.legitimacyScore}/100.`);
+                });
+            }
+        });
+    } catch (error) {
+        console.error("Error reporting scam:", error);
+        alert("⚠️ Failed to analyze the website. Please try again.");
+    }
 });
+
 
 //#endregion Report screen ends
 
 //#region  Redeem screen starts 
-// Initialize user points (Can be stored in localStorage later)
-let userPoints = 70000;
+
+// Retrieve user points from storage or set to 10,000 if not found
+let userPoints;
+chrome.storage.sync.get(["userPoints"], function (result) {
+    userPoints = result.userPoints !== undefined ? result.userPoints : 10000;
+    updatePointsDisplay();
+});
+
 
 // Function to update the displayed points balance
 function updatePointsDisplay() {
     document.getElementById("pointsBalance").innerHTML = `You have <b>${userPoints} points</b>`;
+
+        // Store updated points in chrome.storage.sync
+        chrome.storage.sync.set({ userPoints: userPoints });
+
 }
 
 // Update display on load
@@ -226,9 +260,12 @@ document.getElementById("redeemButton").addEventListener("click", function () {
         return;
     }
 
-    // Deduct points from user balance
-    userPoints -= redeemAmount;
+   // Deduct points & sync storage
+userPoints -= redeemAmount;
+chrome.storage.sync.set({ userPoints: userPoints }, function () {
     updatePointsDisplay();
+});
+
 
     // Hide form and show success message
     redeemForm.classList.add("hidden");
