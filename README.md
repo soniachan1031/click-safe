@@ -70,7 +70,7 @@ Click Safe uses AI-powered analysis and community reporting to detect and preven
 3. Click "Load Unpacked" and select the extension folder from this repo.
     
 4️⃣ Start the Backend Server
-    bash
+   ```sh
    ` npm start `
  
 ## 🎮 How to Use Click Safe?
