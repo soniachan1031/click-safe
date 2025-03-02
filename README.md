@@ -12,9 +12,9 @@ Click Safe uses AI-powered analysis and community reporting to detect and preven
 - *Scam Heatmap & Analytics* – Track scam trends globally.
 
 ## 📌 Why Click Safe?
-💡 Over $10B lost to scams annually – phishing & fake websites trick millions.
-💡 Traditional security tools react too late – Click Safe is proactive.
-💡 Community-driven scam tracking – Users report and verify scams, improving accuracy.
+💡 Over $10B lost to scams annually – phishing & fake websites trick millions.<br/>
+💡 Traditional security tools react too late – Click Safe is proactive.<br/>
+💡 Community-driven scam tracking – Users report and verify scams, improving accuracy.<br/>
 
 ## Technologies Used 🛠
 <div class="container">
@@ -55,23 +55,23 @@ Click Safe uses AI-powered analysis and community reporting to detect and preven
 
 
 ## 🔧 Installation & Setup🚀
-1️⃣ Clone the Repository
-   ```sh
+1. Clone the Repository
+    ```sh
     git clone https://github.com/your-username/Click-Safe.git 
-    cd Click-Safe
+    cd Click-Safe 
 
-2️⃣ Install Dependencies
+3. Install Dependencies <br/>
    ```sh
-   npm install
+   npm install 
     
-3️⃣ Load the Extension in Chrome
-1. Open Google Chrome and navigate to chrome://extensions/.
-2. Enable Developer Mode (top-right corner).
-3. Click "Load Unpacked" and select the extension folder from this repo.
+3.  Load the Extension in Chrome 
+(1). Open Google Chrome and navigate to chrome://extensions/.
+(2). Enable Developer Mode (top-right corner).
+(3). Click "Load Unpacked" and select the extension folder from this repo.
     
-4️⃣ Start the Backend Server
+4. Start the Backend Server
    ```sh
-   npm start
+   npm start 
  
 ## 🎮 How to Use Click Safe?
 1. Install the Click Safe extension in your browser.
@@ -115,20 +115,20 @@ This project is licensed under the Apache License 2.0. See the LICENSE file for 
   <p> GitHub: https://github.com/Mr-BiG1 </p>
   <p> LinkedIn: https://www.linkedin.com/in/darsan-sabu-george-62732b271/ </p>
 
-<p>🔹 Mubarak Hussain Ridoy </p>
-<p>🔹 Email: ridoy51306@gmail.com </p>
-<p>🔹 GitHub: https://github.com/DeveloperRidoy </p>
-<p>🔹 LinkedIn: https://www.linkedin.com/in/md-ridoy/ </p>
+-  Mubarak Hussain Ridoy
+  <p> Email: ridoy51306@gmail.com </p>
+  <p> GitHub: https://github.com/DeveloperRidoy </p>
+  <p> LinkedIn: https://www.linkedin.com/in/md-ridoy/ </p>
 
-<p>🔹 Valentine Chukwuemelie Ohalebo </p>
-<p>🔹 Email: valentine@auviel.com </p>
-<p>🔹 GitHub: https://github.com/noTimeForSchool </p>
-<p>🔹 LinkedIn: https://www.linkedin.com/in/valentine-ohalebo-51bb37221/ </p>
+- Valentine Chukwuemelie Ohalebo 
+  <p> Email: valentine@auviel.com </p>
+  <p> GitHub: https://github.com/noTimeForSchool </p>
+  <p> LinkedIn: https://www.linkedin.com/in/valentine-ohalebo-51bb37221/ </p>
 
-<p>🔹 Shong Chan </p>
-<p>🔹 Email: chanshongsonia@gmail.com </p>
-<p>🔹 GitHub: https://github.com/soniachan1031 </p>
-<p>🔹 LinkedIn: https://www.linkedin.com/in/shongchan/ </p>
+- Shong Chan
+  <p> Email: chanshongsonia@gmail.com </p>
+  <p> GitHub: https://github.com/soniachan1031 </p>
+  <p> LinkedIn: https://www.linkedin.com/in/shongchan/ </p>
 
 ![Group Photo](https://github.com/user-attachments/assets/9d573621-4056-4ea3-ad70-9d4226692ed1)
 
