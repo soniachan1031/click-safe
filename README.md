@@ -65,9 +65,9 @@ Click Safe uses AI-powered analysis and community reporting to detect and preven
    npm install 
     
 3.  Load the Extension in Chrome 
-(1). Open Google Chrome and navigate to chrome://extensions/.
-(2). Enable Developer Mode (top-right corner).
-(3). Click "Load Unpacked" and select the extension folder from this repo.
+(1). Open Google Chrome and navigate to chrome://extensions/. <br/>
+(2). Enable Developer Mode (top-right corner). <br/>
+(3). Click "Load Unpacked" and select the extension folder from this repo. <br/>
     
 4. Start the Backend Server
    ```sh
