@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="result-card">
                     <p><strong>Legitimacy Score:</strong> <span class="score">${data.legitimacyScore}/100</span></p>
                     <p><strong>HTTPS Status:</strong> ${data.httpsStatus}</p>
-                    <p><strong>Potential Scam Type:</strong> <span class="scam-type">${data.scamType}</span></p>
+                    ${(data.scamType)  ? `<p><strong>Potential Scam Type:</strong> <span class="scam-type">${data.scamType}</span></p>` : ""}
                 </div>
     
                 ${data.riskFactors?.length > 0 ? `

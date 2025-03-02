@@ -106,7 +106,7 @@ const completion = await openai.chat.completions.create({
    - 70-89: **Likely Legitimate**, minor concerns (e.g., missing company info)
    - 40-69: **Suspicious**, potential risks detected (e.g., misleading content, low transparency)
    - 1-39: **High Risk**, strong scam indicators
-3. **SCAM TYPE:** If a scam is detected, **identify the type** (e.g., phishing, counterfeit, data harvesting). If no scam, return "Not detected."
+3. **SCAM TYPE:** If a scam is detected, **identify the type** (e.g., phishing, counterfeit, data harvesting). If no scam, return ""
 4. **RISK FACTORS:** Provide at least **one specific reason** for scores below 90.
 5. **KEY INDICATORS:** Highlight both **positive and negative signals** (e.g., "HTTPS secured," "Fake reviews detected").
 6. **INSIGHTS:** Ensure insights are factual, avoiding assumptions. **If scraping fails, state 'Insufficient data for full assessment'.**
@@ -119,7 +119,7 @@ const completion = await openai.chat.completions.create({
 \`\`\`json
 {
     "legitimacyScore": (integer between 1-100),
-    "scamType": (string or "Not detected"),
+    "scamType": (string),
     "riskFactors": (array of strings, at least one if score <90),
     "keyIndicators": (array of strings, mix of pros/cons),
     "insights": (string, factual & objective)
@@ -137,7 +137,7 @@ Respond **ONLY** with JSON—no extra text.`
 
         res.json({
             legitimacyScore: parsedResponse.legitimacyScore,
-            scamType: parsedResponse.scamType || "Not detected",
+            scamType: parsedResponse.scamType || "",
             riskFactors: parsedResponse.riskFactors || [],
             httpsStatus: isHttps ? "Yes" : "No",
             keyIndicators: parsedResponse.keyIndicators || [],
