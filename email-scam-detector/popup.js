@@ -4,6 +4,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const resultContainer = document.getElementById("resultContainer");
     const loadingDiv = document.getElementById("loading");
 
+    // Retrieve stored analysis data when popup opens
+    chrome.storage.local.get(["analysisData", "siteUrl"], (result) => {
+        if (result.analysisData) {
+            scanInput.value = result.siteUrl || ""; // Fill the URL input field
+            displayResults(result.analysisData);
+            chrome.storage.local.remove(["analysisData", "siteUrl"]); // Clear stored data after displaying
+        }
+    });
+
     scanButton.addEventListener("click", async function () {
         const userInput = scanInput.value.trim();
         if (!userInput) {
@@ -79,38 +88,3 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
     }
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Set default tab to Home on load
-    switchTab('homePage', document.querySelector("[data-tab='homePage']"));
-
-    // Attach event listeners to all tab buttons
-    document.querySelectorAll('.tab-btn').forEach(button => {
-        button.addEventListener("click", function () {
-            const tabId = this.getAttribute("data-tab");
-            switchTab(tabId, this); // Pass "this" to reference the clicked button
-        });
-    });
-});
-
-function switchTab(tabId, clickedButton) {
-    // Hide all tab contents
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
-    });
-
-    // Remove active state from all buttons
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-
-    // Show only the selected tab content
-    document.getElementById(tabId).classList.add('active');
-
-    // Highlight the clicked tab button (Ensure button exists)
-    if (clickedButton) {
-        clickedButton.classList.add('active');
-    }
-}
-
-
