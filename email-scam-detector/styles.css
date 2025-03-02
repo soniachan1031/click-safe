@@ -476,29 +476,66 @@ button:hover {
     box-shadow: 0 6px 12px rgba(0, 72, 236, 0.4);
 }
 
-/* Scam Status Message */
-.scam-status {
+/* Result Box */
+.result-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Card Styling */
+.result-card {
+    background: #252525;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 72, 236, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.result-card:hover {
+    transform: scale(1.02);
+}
+
+/* Legitimacy Score */
+.score {
     font-size: 18px;
     font-weight: bold;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 10px;
-    text-align: center;
-    width: 100%;
-}
-
-/* Red for Scam */
-.scam-status.scam {
-    background: rgba(255, 59, 59, 0.2);
-    color: #ff3b3b;
-    border: 1px solid #ff3b3b;
-}
-
-/* Green for Safe */
-.scam-status.safe {
-    background: rgba(46, 204, 113, 0.2);
     color: #2ecc71;
-    border: 1px solid #2ecc71;
+}
+
+/* Scam Type */
+.scam-type {
+    font-weight: bold;
+    color: #ff3b3b;
+}
+
+/* Styled List */
+.styled-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.styled-list li {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* Bullet Icon */
+.styled-list li::before {
+    content: "•";
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 8px;
+    color: #e84118;
 }
 
 

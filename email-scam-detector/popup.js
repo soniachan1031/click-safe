@@ -47,21 +47,37 @@ document.addEventListener("DOMContentLoaded", function () {
         resultContainer.innerHTML = `
             <div class="result-box">
                 <h3>Website Analysis</h3>
-                <p><strong>Legitimacy Score:</strong> ${data.legitimacyScore}/100</p>
-                <p><strong>HTTPS Status:</strong> ${data.httpsStatus}</p>
-                <p><strong>Potential Scam Type:</strong> ${data.scamType}</p>
-                
-                ${data.riskFactors?.length > 0 ? `<h4>Risk Factors:</h4>
-                <ul>${data.riskFactors.map(factor => `<li>${factor}</li>`).join("")}</ul>` : ""}
-                
-                ${data.keyIndicators?.length > 0 ? `<h4>Key Indicators:</h4>
-                <ul>${data.keyIndicators.map(indicator => `<li>${indicator}</li>`).join("")}</ul>` : ""}
-
-                <h4>AI Insights:</h4>
-                <p>${data.insights}</p>
+    
+                <div class="result-card">
+                    <p><strong>Legitimacy Score:</strong> <span class="score">${data.legitimacyScore}/100</span></p>
+                    <p><strong>HTTPS Status:</strong> ${data.httpsStatus}</p>
+                    <p><strong>Potential Scam Type:</strong> <span class="scam-type">${data.scamType}</span></p>
+                </div>
+    
+                ${data.riskFactors?.length > 0 ? `
+                <div class="result-card">
+                    <h4>🚨 Risk Factors</h4>
+                    <ul class="styled-list">
+                        ${data.riskFactors.map(factor => `<li>${factor}</li>`).join("")}
+                    </ul>
+                </div>` : ""}
+    
+                ${data.keyIndicators?.length > 0 ? `
+                <div class="result-card">
+                    <h4>🔍 Key Indicators</h4>
+                    <ul class="styled-list">
+                        ${data.keyIndicators.map(indicator => `<li>${indicator}</li>`).join("")}
+                    </ul>
+                </div>` : ""}
+    
+                <div class="result-card">
+                    <h4>🧠 AI Insights</h4>
+                    <p>${data.insights}</p>
+                </div>
             </div>
         `;
     }
+    
 
     function displayUnreachableSiteMessage() {
         resultContainer.innerHTML = `
