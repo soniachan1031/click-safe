@@ -59,10 +59,10 @@ Click Safe uses AI-powered analysis and community reporting to detect and preven
    ```sh
     git clone https://github.com/your-username/Click-Safe.git 
     cd Click-Safe
-    
+
 2️⃣ Install Dependencies
    ```sh
-   ` npm install `
+   npm install
     
 3️⃣ Load the Extension in Chrome
 1. Open Google Chrome and navigate to chrome://extensions/.
@@ -71,7 +71,7 @@ Click Safe uses AI-powered analysis and community reporting to detect and preven
     
 4️⃣ Start the Backend Server
    ```sh
-   ` npm start `
+   npm start
  
 ## 🎮 How to Use Click Safe?
 1. Install the Click Safe extension in your browser.
@@ -93,13 +93,13 @@ We welcome contributors to improve Click Safe! 🚀
 1. Fork the repository 🍴
 2. Create a feature branch:
    ```sh
-   ` git checkout -b feature-new-feature `
+   git checkout -b feature-new-feature
 3. Commit your changes
    ```sh
-   ` git commit -m "Added new feature" `
+   git commit -m "Added new feature" 
 4. Push your branch:
    ```sh
-   ` git push origin feature-new-feature `
+   git push origin feature-new-feature
 5. Submit a Pull Request (PR) 📢
 
 ### Issues & Bugs
@@ -110,10 +110,10 @@ We welcome contributors to improve Click Safe! 🚀
 This project is licensed under the Apache License 2.0. See the LICENSE file for more details.
 
 ## 📞 Contact & Support
-<p>🔹 Darsan Sabu George </p>
-<p>🔹 Email: darsansabu09@gmail.com </p>
-<p>🔹 GitHub: https://github.com/Mr-BiG1 </p>
-<p>🔹 LinkedIn: https://www.linkedin.com/in/darsan-sabu-george-62732b271/ </p>
+- Darsan Sabu George 
+  <p> Email: darsansabu09@gmail.com </p>
+  <p> GitHub: https://github.com/Mr-BiG1 </p>
+  <p> LinkedIn: https://www.linkedin.com/in/darsan-sabu-george-62732b271/ </p>
 
 <p>🔹 Mubarak Hussain Ridoy </p>
 <p>🔹 Email: ridoy51306@gmail.com </p>
