@@ -60,11 +60,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p><strong>HTTPS Status:</strong> ${data.httpsStatus}</p>
                 <p><strong>Potential Scam Type:</strong> ${data.scamType}</p>
                 
-                <h4>Risk Factors:</h4>
-                <ul>${data.riskFactors.map(factor => `<li>${factor}</li>`).join("")}</ul>
+                ${data.riskFactors?.length > 0 ? `<h4>Risk Factors:</h4>
+                <ul>${data.riskFactors.map(factor => `<li>${factor}</li>`).join("")}</ul>` : ""}
                 
-                <h4>Key Indicators:</h4>
-                <ul>${data.keyIndicators.map(indicator => `<li>${indicator}</li>`).join("")}</ul>
+                ${data.keyIndicators?.length > 0 ? `<h4>Key Indicators:</h4>
+                <ul>${data.keyIndicators.map(indicator => `<li>${indicator}</li>`).join("")}</ul>` : ""}
 
                 <h4>AI Insights:</h4>
                 <p>${data.insights}</p>
