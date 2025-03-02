@@ -110,25 +110,25 @@ We welcome contributors to improve Click Safe! 🚀
 This project is licensed under the Apache License 2.0. See the LICENSE file for more details.
 
 ## 📞 Contact & Support
-🔹 Darsan Sabu George
-🔹 Email: darsansabu09@gmail.com
-🔹 GitHub: https://github.com/Mr-BiG1 
-🔹 LinkedIn: https://www.linkedin.com/in/darsan-sabu-george-62732b271/
+<p>🔹 Darsan Sabu George </p>
+<p>🔹 Email: darsansabu09@gmail.com </p>
+<p>🔹 GitHub: https://github.com/Mr-BiG1 </p>
+<p>🔹 LinkedIn: https://www.linkedin.com/in/darsan-sabu-george-62732b271/ </p>
 
-🔹 Mubarak Hussain Ridoy
-🔹 Email: ridoy51306@gmail.com
-🔹 GitHub: https://github.com/DeveloperRidoy
-🔹 LinkedIn: https://www.linkedin.com/in/md-ridoy/
+<p>🔹 Mubarak Hussain Ridoy </p>
+<p>🔹 Email: ridoy51306@gmail.com </p>
+<p>🔹 GitHub: https://github.com/DeveloperRidoy </p>
+<p>🔹 LinkedIn: https://www.linkedin.com/in/md-ridoy/ </p>
 
-🔹 Valentine Chukwuemelie Ohalebo
-🔹 Email: valentine@auviel.com
-🔹 GitHub: https://github.com/noTimeForSchool
-🔹 LinkedIn: https://www.linkedin.com/in/valentine-ohalebo-51bb37221/
+<p>🔹 Valentine Chukwuemelie Ohalebo </p>
+<p>🔹 Email: valentine@auviel.com </p>
+<p>🔹 GitHub: https://github.com/noTimeForSchool </p>
+<p>🔹 LinkedIn: https://www.linkedin.com/in/valentine-ohalebo-51bb37221/ </p>
 
-🔹 Shong Chan
-🔹 Email: chanshongsonia@gmail.com
-🔹 GitHub: https://github.com/soniachan1031
-🔹 LinkedIn: https://www.linkedin.com/in/shongchan/ 
+<p>🔹 Shong Chan </p>
+<p>🔹 Email: chanshongsonia@gmail.com </p>
+<p>🔹 GitHub: https://github.com/soniachan1031 </p>
+<p>🔹 LinkedIn: https://www.linkedin.com/in/shongchan/ </p>
 
 ## ⭐ Support Us!
 If you find Click Safe useful, please star this repo ⭐ and share it with others!
