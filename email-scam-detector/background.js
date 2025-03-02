@@ -1,18 +1,28 @@
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.local.set({ extensionActivated: true });
+    chrome.storage.local.set({ extensionActivated: true, lastScannedDomain: "" });
+});
+
+// ✅ Remove `analysisData` & `lastUserInput` when the extension is closed, but keep `lastScannedDomain`
+chrome.runtime.onSuspend.addListener(() => {
+    chrome.storage.local.remove(["analysisData", "lastUserInput"], () => {
+        console.log("Cleared analysis data and last user input on extension close, but kept lastScannedDomain.");
+    });
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === "complete" && tab.url) {
-        chrome.storage.local.get(["extensionActivated"], (result) => {
+        chrome.storage.local.get(["extensionActivated", "lastScannedDomain"], (result) => {
             if (result.extensionActivated) {
-                analyzeWebsite(tab.url, tabId);
+                const currentDomain = new URL(tab.url).hostname;
+                if (currentDomain !== result.lastScannedDomain) {
+                    analyzeWebsite(tab.url, tabId, currentDomain);
+                }
             }
         });
     }
 });
 
-async function analyzeWebsite(url, tabId) {
+async function analyzeWebsite(url, tabId, domain) {
     try {
         const response = await fetch("http://localhost:5000/analyze", {
             method: "POST",
@@ -24,6 +34,7 @@ async function analyzeWebsite(url, tabId) {
         console.log("Analysis Result:", data);
 
         if (data.legitimacyScore < 70) {
+            chrome.storage.local.set({ lastScannedDomain: domain });
             notifyUser(data, url, tabId);
             showPopup(tabId, data, url);
         }
@@ -111,7 +122,7 @@ function showPopup(tabId, data, url) {
                     chrome.storage.local.set({ analysisData: analysisData, siteUrl: siteUrl }, () => {
                         chrome.runtime.sendMessage({ action: "open_popup" });
                     });
-                });
+                });                
             }
         },
         args: [data, url]
