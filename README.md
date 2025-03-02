@@ -60,11 +60,11 @@ Click Safe uses AI-powered analysis and community reporting to detect and preven
     git clone https://github.com/your-username/Click-Safe.git 
     cd Click-Safe 
 
-3. Install Dependencies <br/>
+2. Install Dependencies <br/>
    ```sh
    npm install 
     
-3.  Load the Extension in Chrome 
+3.  Load the Extension in Chrome <br/>
 (1). Open Google Chrome and navigate to chrome://extensions/. <br/>
 (2). Enable Developer Mode (top-right corner). <br/>
 (3). Click "Load Unpacked" and select the extension folder from this repo. <br/>
