@@ -23,8 +23,10 @@ async function analyzeWebsite(url, tabId) {
         const data = await response.json();
         console.log("Analysis Result:", data);
 
-        notifyUser(data, url, tabId);
-        showPopup(tabId, data, url);
+        if (data.legitimacyScore < 70) {
+            notifyUser(data, url, tabId);
+            showPopup(tabId, data, url);
+        }
     } catch (error) {
         console.error("Error analyzing website:", error);
     }
@@ -67,7 +69,7 @@ function showPopup(tabId, data, url) {
                 overlay.style.height = "100vh";
                 overlay.style.backgroundColor = "rgba(0, 0, 0, 0.85)";
                 overlay.style.backdropFilter = "blur(10px)";
-                overlay.style.zIndex = "999999999999999999999999999999";
+                overlay.style.zIndex = "99999";
                 document.body.appendChild(overlay);
             }
 
@@ -84,7 +86,7 @@ function showPopup(tabId, data, url) {
                 popup.style.color = "#ffffff";
                 popup.style.border = "1px solid #333";
                 popup.style.padding = "20px";
-                popup.style.zIndex = "9999999999999999999999999999999";
+                popup.style.zIndex = "100000";
                 popup.style.display = "flex";
                 popup.style.flexDirection = "column";
                 popup.style.alignItems = "center";
@@ -92,7 +94,7 @@ function showPopup(tabId, data, url) {
                 popup.style.borderRadius = "12px";
                 popup.innerHTML = `
                     <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Website Analysis</h3>
-                    <p style="font-size: 14px; color: #b0b0b0;">URL: ${siteUrl}</p>
+                    <p style="font-size: 14px; color: #b0b0b0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;" title="${siteUrl}">URL: ${siteUrl}</p>
                     <p><strong>Legitimacy Score:</strong> ${analysisData.legitimacyScore}/100</p>
                     <p><strong>Scam Type:</strong> ${analysisData.scamType}</p>
                     <div style="display: flex; gap: 10px; margin-top: 15px;">

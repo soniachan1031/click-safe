@@ -16,7 +16,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // Function to check if a site needs Puppeteer
 async function needsPuppeteer(url) {
-    const jsHeavySites = ["instagram.com", "twitter.com", "linkedin.com", "facebook.com"];
+    const jsHeavySites = ["instagram.com", "twitter.com", "linkedin.com", "facebook.com", "bluemoonshop.cc"];
     return jsHeavySites.some((site) => url.includes(site));
 }
 
