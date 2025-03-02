@@ -57,8 +57,8 @@ Click Safe uses AI-powered analysis and community reporting to detect and preven
 ## 🔧 Installation & Setup🚀
 1️⃣ Clone the Repository
    ```sh
-    ` git clone https://github.com/your-username/Click-Safe.git `
-    ` cd Click-Safe `
+    ` git clone https://github.com/your-username/Click-Safe.git 
+    cd Click-Safe `
     
 2️⃣ Install Dependencies
    ```sh
