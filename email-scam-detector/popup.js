@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="result-card">
                     <p><strong>Legitimacy Score:</strong> <span class="score">${data.legitimacyScore}/100</span></p>
                     <p><strong>HTTPS Status:</strong> ${data.httpsStatus}</p>
-                    ${(data.scamType)  ? `<p><strong>Potential Scam Type:</strong> <span class="scam-type">${data.scamType}</span></p>` : ""}
+                    ${(data.scamType) ? `<p><strong>Potential Scam Type:</strong> <span class="scam-type">${data.scamType}</span></p>` : ""}
                 </div>
     
                 ${data.riskFactors?.length > 0 ? `
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
     }
-    
+
 
     function displayUnreachableSiteMessage() {
         resultContainer.innerHTML = `
@@ -135,7 +135,7 @@ function switchTab(tabId, clickedButton) {
 //#region Report screen starts
 document.getElementById("scamType").addEventListener("change", function () {
     let otherInput = document.getElementById("otherScamType");
-    
+
     if (this.value === "other") {
         otherInput.classList.remove("hidden");
     } else {
@@ -156,9 +156,30 @@ document.getElementById("reportButton").addEventListener("click", function () {
         return;
     }
 
-    // Hide form and show success message
-    reportForm.classList.add("hidden");
-    successMessage.classList.remove("hidden");
+    // Show processing message
+successMessage.innerHTML = "🔄 Checking URL legitimacy...";
+successMessage.classList.remove("hidden");
+
+// Simulate API call to ChatGPT to get legitimacy score
+fetchChatGPTAnalysis(reportInput).then((legitimacyScore) => {
+    if (legitimacyScore < 70) {
+        // Award points
+        chrome.storage.sync.get(["userPoints"], function (result) {
+            let currentPoints = result.userPoints || 10000;
+            let newPoints = currentPoints + 100;
+            chrome.storage.sync.set({ userPoints: newPoints });
+
+            // Show success message
+            successMessage.innerHTML = `✅ Report Successfully Submitted! You earned <b>100 points</b>!`;
+        });
+    } else {
+        // Show alert for non-scam URLs
+        alert(`⚠️ This URL has a legitimacy score of ${legitimacyScore}/100. Reporting rejected.`);
+        successMessage.classList.add("hidden");
+        reportForm.classList.remove("hidden");
+    }
+});
+
 
     // Reset fields after 2 seconds
     setTimeout(() => {
@@ -175,12 +196,21 @@ document.getElementById("reportButton").addEventListener("click", function () {
 //#endregion Report screen ends
 
 //#region  Redeem screen starts 
-// Initialize user points (Can be stored in localStorage later)
-let userPoints = 70000;
+// Initialize user points 
+// Retrieve user points from storage or set to 10,000 if not found
+let userPoints;
+chrome.storage.sync.get(["userPoints"], function (result) {
+    userPoints = result.userPoints !== undefined ? result.userPoints : 10000;
+    updatePointsDisplay();
+});
+
 
 // Function to update the displayed points balance
 function updatePointsDisplay() {
     document.getElementById("pointsBalance").innerHTML = `You have <b>${userPoints} points</b>`;
+
+    // Store updated points in chrome.storage.local
+    chrome.storage.sync.set({ userPoints: userPoints });
 }
 
 // Update display on load
@@ -210,9 +240,12 @@ document.getElementById("redeemButton").addEventListener("click", function () {
         return;
     }
 
-    // Deduct points from user balance
+    // Deduct points & save to storage
     userPoints -= redeemAmount;
-    updatePointsDisplay();
+    chrome.storage.sync.set({ userPoints: userPoints }, function () {
+        updatePointsDisplay();
+    });
+
 
     // Hide form and show success message
     redeemForm.classList.add("hidden");
@@ -246,7 +279,7 @@ function updateAnalyticsDisplay() {
     document.getElementById("viewHeatmapButton").addEventListener("click", function () {
         window.open("heatmap.html", "_blank");
     });
-    
+
 }
 
 // Update display on load
@@ -256,3 +289,36 @@ document.addEventListener("DOMContentLoaded", updateAnalyticsDisplay);
 
 //#endregion Analytics screen ends
 
+
+async function fetchChatGPTAnalysis(url) {
+    let prompt = `Analyze the legitimacy of the following URL and return a score from 0 to 100, where 0 is a confirmed scam and 100 is a fully safe website. Only return the number without extra text. URL: ${url}`;
+
+    let apiKey; // Declare variable for API key
+
+    // Retrieve API key from secure storage (Chrome Storage or Backend)
+    await chrome.storage.local.get(["openai_api_key"], function (result) {
+        apiKey = result.openai_api_key;
+    });
+
+    if (!apiKey) {
+        console.error("API Key not found! Store it securely in Chrome storage or backend.");
+        return 50; // Default to 50 if API key is missing
+    }
+
+    let response = await fetch("https://api.openai.com/v1/completions", {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            model: "gpt-4o-mini",
+            prompt: prompt,
+            max_tokens: 10
+        })
+    });
+
+    let data = await response.json();
+    let score = parseInt(data.choices[0].text.trim(), 10);
+    return isNaN(score) ? 50 : score; // Default to 50 if parsing fails
+}
