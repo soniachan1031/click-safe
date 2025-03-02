@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Leaflet heatmap plugin loaded successfully!");
 
     // Initialize map centered in Kitchener, Canada
-    var map = L.map('map').setView([43.4516, -80.4925], 13); // Kitchener coordinates
+    var map = L.map('map').setView([43.4516, -80.4925], 15); // Kitchener coordinates
 
     // Add OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
