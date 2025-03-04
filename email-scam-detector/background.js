@@ -2,7 +2,7 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.local.set({ extensionActivated: true, lastScannedDomain: "" });
 });
 
-// ✅ Remove `analysisData` & `lastUserInput` when the extension is closed, but keep `lastScannedDomain`
+// Remove `analysisData` & `lastUserInput` when the extension is closed, but keep `lastScannedDomain`
 chrome.runtime.onSuspend.addListener(() => {
     chrome.storage.local.remove(["analysisData", "lastUserInput"], () => {
         console.log("Cleared analysis data and last user input on extension close, but kept lastScannedDomain.");
